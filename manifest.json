@@ -4,7 +4,8 @@
   "version": "1.0",
   "description": "Extract and open SlideShare embed URL in a new tab.",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "tabs"
   ],
   "background": {
     "service_worker": "background.js"
