@@ -10,7 +10,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .then(html => {
         const embedUrl = extractEmbedUrl(html);
         if (embedUrl) {
-          chrome.tabs.create({ url: embedUrl });
+          chrome.tabs.create({ url: embedUrl }, () => {
+            sendResponse({ status: 'opened' });
+          });
         } else {
           alert('No embed URL found in the provided SlideShare page.');
         }
@@ -19,8 +21,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         console.error('Error:', error);
         alert('Failed to fetch URL or extract embed URL.');
       });
+    return true; // keep the message channel open for the async response
   }
-  return true;
 });
 
 function extractEmbedUrl(html) {
