@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Quickdeck",
+  "version": "1.0",
+  "description": "Extract and open SlideShare embed URL in a new tab.",
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
