@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (isValidUrl(url)) {
       document.getElementById('url').value = url;
-      chrome.runtime.sendMessage({ action: 'openUrl', url: url });
-      window.close();
     }
   });
 
@@ -14,11 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const url = document.getElementById('url').value;
 
     if (!isValidUrl(url)) {
-      alert('Please enter a valid SlideShare URL.');
+      showAlert('Please enter a valid SlideShare URL.');
       return;
     }
 
-    chrome.runtime.sendMessage({ action: 'openUrl', url: url });
+    showLoading(true);
+    chrome.runtime.sendMessage({ action: 'openUrl', url: url }, () => {
+      showLoading(false);
+    });
   });
 });
 
@@ -35,3 +36,10 @@ function showLoading(show) {
   const loadingElement = document.getElementById('loading');
   loadingElement.style.display = show ? 'block' : 'none';
 }
+
+function showAlert(message) {
+  const errorDiv = document.getElementById('error');
+  errorDiv.textContent = message;
+  errorDiv.style.display = 'block';
+}
+

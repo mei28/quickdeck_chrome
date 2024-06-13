@@ -5,6 +5,7 @@
   "description": "Extract and open SlideShare embed URL in a new tab.",
   "permissions": [
     "tabs",
+    "contextMenus",
     "activeTab"
   ],
   "background": {
