@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentTab && currentTab.url) {
       const url = currentTab.url;
       if (isValidUrl(url)) {
+        chrome.runtime.sendMessage({ action: 'openUrl', url: url });
+        window.close();
+      } else {
         document.getElementById('url').value = url;
       }
     }
