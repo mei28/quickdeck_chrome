@@ -31,3 +31,7 @@ function isValidUrl(url) {
   }
 }
 
+function showLoading(show) {
+  const loadingElement = document.getElementById('loading');
+  loadingElement.style.display = show ? 'block' : 'none';
+}
