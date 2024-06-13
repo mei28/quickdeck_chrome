@@ -8,16 +8,16 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "openSlideShareUrl") {
-    if (tab && tab.url && isValidUrl(tab.url)) {
+    if (info.linkUrl && isValidUrl(info.linkUrl)) {
+      processUrl(info.linkUrl);
+    } else if (tab && tab.url && isValidUrl(tab.url)) {
       processUrl(tab.url);
     } else {
       console.log("Not a valid SlideShare URL or no URL found.");
-      if (tab.id) {
-        chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: () => alert("The URL is not a valid SlideShare URL.")
-        });
-      }
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => alert("The URL is not a valid SlideShare URL.")
+      });
     }
   }
 });
