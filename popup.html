@@ -9,13 +9,9 @@
       font-family: Arial, sans-serif;
     }
 
-    input {
-      width: 100%;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 10px;
+    #error {
+      color: red;
+      display: none;
     }
 
     #loading {
@@ -26,9 +22,10 @@
 </head>
 
 <body>
-  <input type="text" id="url" placeholder="Enter SlideShare URL" />
+  <input type="text" id="url" placeholder="Enter SlideShare URL">
   <button id="open">Open</button>
   <div id="loading">Loading...</div>
+  <div id="error"></div>
   <script src="popup.js"></script>
 </body>
 

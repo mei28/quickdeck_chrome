@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     const currentTab = tabs[0];
-    const url = currentTab.url;
-
-    if (isValidUrl(url)) {
-      document.getElementById('url').value = url;
+    if (currentTab && currentTab.url) {
+      const url = currentTab.url;
+      if (isValidUrl(url)) {
+        document.getElementById('url').value = url;
+      }
     }
   });
 
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showLoading(true);
     chrome.runtime.sendMessage({ action: 'openUrl', url: url }, () => {
       showLoading(false);
+      window.close();
     });
   });
 });
